@@ -1,12 +1,13 @@
 import time
 
 #  Define Constants
-MIN_BUDGET = 10
-MAX_BUDGET = 1000
-SAVINGS = 100
+MIN_BUDGET = 10 # Defines the minimum budget for input
+MAX_BUDGET = 1000 # Limits the input upwards
+SAVINGS = 100 # The target level / minimum at which the amount of savings is “good”
 
-# User number input with verification
-def get_float(prompt, min_value=None, max_value=None): # None means: no check for min/max
+
+# Verification of users number input (budget)
+def get_float(prompt, min_value=None, max_value=None):  # Returns input as float # None means: no check for min/max
     while True:
         try:
             value = float(input(prompt))
@@ -17,14 +18,15 @@ def get_float(prompt, min_value=None, max_value=None): # None means: no check fo
         except ValueError:
             print("Please enter a valid number.")
 
+
 # Handles savings decision
-def update_savings(savings, rest):
+def update_savings(savings:float, rest:float):
     attempts = 0
     while True:
         choice = input("Do you want to save the remaining amount? (yes/no) ").lower()
-        if choice == "yes":
+        if choice == "yes" and savings >= 0:
             savings += rest
-            print(f"Great! Your total savings are now {savings:.2f}.") # Returns savings with two decimal digits
+            print(f"Great! Your total savings are now {savings:.2f}.")  # Returns savings with two decimal digits
             return savings
         elif choice == "no":
             print("Alright, maybe treat yourself! 😉")
@@ -37,6 +39,7 @@ def update_savings(savings, rest):
                 return savings
             print("Hmm... please type 'yes' or 'no'.")
 
+
 # Budget evaluation with different levels depending on savings
 def evaluate_savings(savings):
     print("\n--- Budget Boss Evaluation ---")
@@ -48,6 +51,7 @@ def evaluate_savings(savings):
         print("😅 Budget Boss Level: Cost-Coverer – but you're not out yet.")
     else:
         print("💸 Budget Boss Level: Chaotic-Spender – better luck next time!")
+
 
 # Define main function
 def main():
@@ -80,6 +84,7 @@ def main():
 
     savings = update_savings(savings, rest)
     evaluate_savings(savings)
+
 
 # Only run main function if this file is executed directly
 if __name__ == "__main__":
