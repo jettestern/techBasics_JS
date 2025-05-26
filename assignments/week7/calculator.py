@@ -45,10 +45,10 @@ def write_csv(data, output_filename):
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(data)
-    print("✅ New file written:", output_filename)
+    print("New file written:", output_filename)
 
 def print_analysis(data):
-    print("\n📊 Average per Stream:")
+    print("\n Average per Stream:")
     streams = {}
     for row in data:
         stream = row['Stream']
@@ -60,7 +60,7 @@ def print_analysis(data):
         avg_stream = sum(values) / len(values)
         print(f"  Stream {s}: {avg_stream:.2f} Points")
 
-    print("\n📅 Average per Week:")
+    print("\n Average per Week:")
     week_cols = [k for k in data[0].keys() if k.lower().startswith("week")]
     for week in week_cols:
         values = [parse_score(row[week]) for row in data]
